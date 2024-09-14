@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Root Variables for Themes */
+      :root {
+        --primary-bg: #1e1e1e;
+        --primary-text: white;
+        --accent-color: blue;
+        --header-color: #333;
+        --background-image: url("tech-background.jpg");
+      }
+
+      body {
+        background-color: var(--primary-bg);
+        background-image: var(--background-image);
+        background-size: cover;
+        background-position: center;
+        color: var(--primary-text);
+        transition: background-color 0.5s, color 0.5s;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: var(--header-color);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      header a {
+        text-decoration: none;
+        color: var(--primary-text);
+        padding: 10px 20px;
+        background-color: var(--accent-color);
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      header a:hover {
+        background-color: white;
+        color: var(--accent-color);
+        transform: scale(1.05);
+      }
+
+      .checkout-container {
+        max-width: 600px;
+        margin: 40px auto;
+        background-color: rgba(44, 44, 44, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+        transition: background-color 0.5s;
+      }
+
+      .balance-display {
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        background-color: var(--header-color);
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .redeem-section {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .redeem-section button {
+        padding: 10px 20px;
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        margin: 5px;
+      }
+
+      .redeem-section button:hover {
+        background-color: white;
+        color: var(--accent-color);
+        transform: scale(1.05);
+      }
+
+      .custom-redeem {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .custom-redeem input {
+        padding: 10px;
+        font-size: 1.2em;
+        border-radius: 5px;
+        border: none;
+        margin-right: 10px;
+        width: 100px;
+      }
+
+      .custom-redeem button {
+        padding: 10px 20px;
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .custom-redeem button:hover {
+        background-color: white;
+        color: var(--accent-color);
+        transform: scale(1.05);
+      }
+
+      .payment-methods {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .payment-methods select {
+        padding: 10px;
+        font-size: 1.2em;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        display: block;
+        margin-bottom: 20px;
+      }
+
+      .redemption-history {
+        margin-top: 30px;
+        background-color: var(--header-color);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: left;
+        color: var(--primary-text);
+      }
+
+      .redemption-history h2 {
+        margin-bottom: 15px;
+        color: var(--accent-color);
+      }
+
+      .redemption-history table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .redemption-history table,
+      th,
+      td {
+        border: 1px solid var(--accent-color);
+      }
+
+      .redemption-history th,
+      .redemption-history td {
+        padding: 10px;
+        text-align: center;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+      }
+
+      nav a {
+        padding: 10px 20px;
+        background-color: var(--header-color);
+        border-radius: 5px;
+        text-decoration: none;
+        color: var(--primary-text);
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      nav a:hover {
+        background-color: var(--accent-color);
+        color: white;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span id="account-balance">$0.00</span>
+      <a href="/logout">Log Out</a>
+    </header>
+
+    <main>
+      <div class="checkout-container">
+        <h1>Checkout</h1>
+        <div class="balance-display">
+          <p>Available Balance: $<span id="user-balance">20.00</span></p>
+        </div>
+        <div class="redeem-section">
+          <button id="redeem-20">Redeem $20</button>
+          <button id="redeem-50">Redeem $50</button>
+          <button id="redeem-100">Redeem $100</button>
+          <button id="redeem-all">Redeem All</button>
+        </div>
+        <div class="custom-redeem">
+          <input
+            type="number"
+            id="custom-amount"
+            placeholder="10.00"
+            min="10"
+          />
+          <button id="redeem-custom">Redeem</button>
+        </div>
+
+        <div class="payment-methods">
+          <h2>Select Payment Method</h2>
+          <select id="payment-method">
+            <option value="paypal">PayPal</option>
+            <option value="credit-card">Credit/Debit Card</option>
+            <option value="bank-transfer">Bank Transfer</option>
+          </select>
+        </div>
+
+        <div class="redemption-history">
+          <h2>Redemption History</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="history-table">
+              <!-- Redemption history will be dynamically inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <nav>
+      <a href="profile.html">Profile</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const minAmount = 10;
+        const userBalanceElement = document.getElementById("user-balance");
+        const historyTable = document.getElementById("history-table");
+        let userBalance = parseFloat(userBalanceElement.innerText);
+
+        function redeemAmount(amount) {
+          if (amount < minAmount) {
+            alert("Amount must be at least $10.");
+          } else if (amount > userBalance) {
+            alert("Insufficient balance to redeem this amount.");
+          } else {
+            const paymentMethod =
+              document.getElementById("payment-method").value;
+            const status = document.getElementById("Pending...").value;
+            const currentDate = new Date().toISOString().split("T")[0];
+
+            // Update the user balance
+            userBalance -= amount;
+            userBalanceElement.innerText = userBalance.toFixed(2);
+
+            // Add the redemption to the history table
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `<td>${currentDate}</td><td>$${amount.toFixed(
+              2
+            )}</td><td>${paymentMethod}</td><td>${status}</td>`;
+            historyTable.appendChild(newRow);
+
+            alert(`Redeemed $${amount} using ${paymentMethod}`);
+          }
+        }
+        document
+          .getElementById("redeem-20")
+          .addEventListener("click", () => redeemAmount(20));
+        document
+          .getElementById("redeem-50")
+          .addEventListener("click", () => redeemAmount(50));
+        document
+          .getElementById("redeem-100")
+          .addEventListener("click", () => redeemAmount(100));
+        document
+          .getElementById("redeem-all")
+          .addEventListener("click", () => redeemAmount(userBalance));
+
+        document
+          .getElementById("redeem-custom")
+          .addEventListener("click", () => {
+            const customAmount = parseFloat(
+              document.getElementById("custom-amount").value
+            );
+            redeemAmount(customAmount);
+          });
+      });
+    </script>
+  </body>
+</html>

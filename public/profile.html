@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Root Variables for Themes */
+      :root {
+        --primary-bg: #1e1e1e;
+        --primary-text: white;
+        --accent-color: blue;
+        --header-color: #333;
+        --background-image: url("tech-background.jpg");
+      }
+
+      body {
+        background-color: var(--primary-bg);
+        background-image: var(--background-image);
+        background-size: cover;
+        background-position: center;
+        color: var(--primary-text);
+        transition: background-color 0.5s, color 0.5s;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: var(--header-color);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      header a {
+        text-decoration: none;
+        color: var(--primary-text);
+        padding: 10px 20px;
+        background-color: var(--accent-color);
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      header a:hover {
+        background-color: white;
+        color: var(--accent-color);
+        transform: scale(1.05);
+      }
+
+      .profile-container {
+        background-color: rgba(44, 44, 44, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        margin: 40px auto;
+        text-align: center;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+        transition: background-color 0.5s;
+      }
+
+      .profile-info {
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+      }
+
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      input,
+      select {
+        padding: 10px;
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        background-color: #444;
+      }
+
+      /* Profile Picture Styling */
+      .profile-pic-container {
+        text-align: center;
+      }
+
+      #profile-picture-preview {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.5s;
+      }
+
+      #profile-picture-preview:hover {
+        transform: scale(1.1);
+      }
+
+      #profile-pic {
+        display: none;
+      }
+
+      #level-details {
+        color: #000;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+      }
+
+      nav a {
+        padding: 10px 20px;
+        background-color: var(--header-color);
+        border-radius: 5px;
+        text-decoration: none;
+        color: var(--primary-text);
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      nav a:hover {
+        background-color: var(--accent-color);
+        color: white;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span id="account-balance">$0.00</span>
+      <a href="/logout">Log Out</a>
+    </header>
+
+    <main>
+      <div class="container">
+        <h1>Profile</h1>
+        <div class="profile-info">
+          <p><strong>Name:</strong> <span id="user-name">Loading...</span></p>
+          <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+          <p>
+            <strong>Account Balance:</strong> $<span id="user-balance"
+              >0.00</span
+            >
+          </p>
+          <p>
+            <strong>Streak Score:</strong>
+            <span id="streak-score">Loading...</span>
+          </p>
+          <p>
+            <strong>Hearts Remaining:</strong>
+            <span id="hearts-remaining">Loading...</span>
+          </p>
+        </div>
+
+        <div class="profile-container">
+          <div class="form-group profile-pic-container">
+            <label for="profile-pic">Profile Picture</label>
+            <img
+              id="profile-picture-preview"
+              src="https://images.ctfassets.net/ihx0a8chifpc/gPyHKDGI0md4NkRDjs4k8/36be1e73008a0181c1980f727f29d002/avatar-placeholder-generator-500x500.jpg?w=1280&q=60&fm=webp"
+              alt="Profile Picture"
+            />
+            <input type="file" id="profile-pic" accept="image/*" />
+          </div>
+          <!-- Level Information -->
+          <div class="form-group level-info">
+            <div class="level-header">
+              <label for="user-level"
+                >Level: <span id="user-level">Loading...</span></label
+              >
+              <button
+                id="toggle-levels"
+                class="info-button"
+                onclick="toggleLevels()"
+              >
+                !
+              </button>
+            </div>
+            <div id="level-details" class="hidden">
+              <li class="level-box" style="background-color: #00ff00fb">
+                Level 1<br />1 hour = 1 dollar + 2x multiplier<br />3 Days to
+                advance
+              </li>
+              <li class="level-box" style="background-color: #66ff00e3">
+                Level 2<br />1 hour = 1 dollar + 3x multiplier + $1<br />10 Days
+                to advance
+              </li>
+              <li class="level-box" style="background-color: #ccff00c0">
+                Level 3<br />50 min = 1 dollar + 3x multiplier + $2<br />50 Days
+                to advance
+              </li>
+              <li class="level-box" style="background-color: #ffff00d2">
+                Level 4<br />45 min = 1 dolla + 4x multiplier + $3<br />100 Days
+                to advance
+              </li>
+              <li class="level-box" style="background-color: #ffcc00">
+                Level 5<br />40 min = 1 dollar + 5x multiplier + $4<br />200
+                Days to advance
+              </li>
+              <li class="level-box" style="background-color: #ff9933">
+                Level 6<br />35 min = 1 dollar + 5x multiplier + $5<br />300
+                Days to advance
+              </li>
+              <li class="level-box" style="background-color: #ff6600">
+                Level 7<br />30 min = 1 dollar + 5x multiplier + $10<br />500
+                Days to advance
+              </li>
+              <li class="level-box" style="background-color: #ff3300">
+                Level 8<br />30 min = 1 dollar + 5x multiplier + $20<br />500
+                Days to advance
+              </li>
+              <li class="level-box" style="background-color: #ff0000">
+                Level 9<br />10 min = 2 dollars + 5x multiplier + ∞ hearts<br />10
+                Days to advance
+              </li>
+              <li class="level-box" style="background-color: #bd0000">
+                Level 10<br />DELETE ACCOUNT or pay $100 to continue from level
+                3 + 1 STAR + $100
+              </li>
+              <li class="level-box" style="background-color: #000000">
+                ??? SECRET LEVEL ???<br />(LIMITED SPOTS)<br />Get 3 STARS
+              </li>
+            </div>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select name="gender" id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input
+                type="number"
+                name="age"
+                id="age"
+                placeholder="Enter your age"
+                min="0"
+              />
+            </div>
+          </div>
+          <button id="save-button" type="submit" name="save" value="Update">
+            Save
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <nav>
+      <a href="profile.html" class="active">Profile</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+
+    <script>
+      function updateHeartsDisplay(hearts) {
+        const heartsContainer = document.getElementById("hearts-remaining");
+        heartsContainer.innerHTML = ""; // Clear any existing hearts
+
+        for (let i = 0; i < hearts; i++) {
+          const heart = document.createElement("span");
+          heart.innerHTML = "&#10084;"; // Unicode for a filled heart symbol (♥)
+          heart.style.color = "red"; // Optional: set the color of the hearts
+          heart.style.fontSize = "20px"; // Optional: set the size of the hearts
+          heart.style.marginRight = "2px"; // Optional: space between hearts
+          heartsContainer.appendChild(heart);
+        }
+      }
+
+      // Example usage:
+      let remainingHearts = 3;
+      updateHeartsDisplay(remainingHearts);
+
+      // Load user profile
+      async function loadUserProfile() {
+        try {
+          const response = await fetch("/api/user");
+          if (!response.ok) {
+            throw new Error(
+              "Failed to fetch user data: " + response.statusText
+            );
+          }
+
+          const user = await response.json();
+
+          if (!user || typeof user !== "object") {
+            throw new Error("Invalid user data received");
+          }
+
+          document.getElementById("user-name").innerText =
+            user.name || "No name";
+          document.getElementById("name").value = user.name || "No name";
+          document.getElementById("user-email").innerText =
+            user.email || "No email";
+          document.getElementById("user-balance").innerText =
+            user.balance !== undefined ? user.balance.toFixed(2) : "0.00";
+          document.getElementById("account-balance").innerText = `$${
+            user.balance !== undefined ? user.balance.toFixed(2) : "0.00"
+          }`;
+          document.getElementById("profile-picture-preview").src =
+            user.profilePicture ||
+            "https://images.ctfassets.net/ihx0a8chifpc/gPyHKDGI0md4NkRDjs4k8/36be1e73008a0181c1980f727f29d002/avatar-placeholder-generator-500x500.jpg?w=1280&q=60&fm=webp";
+          document.getElementById("gender").value = user.gender || "other";
+          document.getElementById("age").value =
+            user.age !== undefined ? user.age : "";
+        } catch (error) {
+          console.error(error);
+          alert("Failed to load user data. Please try again later.");
+        }
+      }
+
+      function saveProfile() {
+        const profilePic = document.querySelector("#profilePicInput").files[0]; // Profile picture file input
+        const name = document.querySelector("#nameInput").value;
+        const age = document.querySelector("#ageInput").value;
+        const gender = document.querySelector("#genderInput").value;
+
+        const formData = new FormData();
+        formData.append("profilePic", profilePic);
+        formData.append("name", name);
+        formData.append("age", age);
+        formData.append("gender", gender);
+
+        fetch("/api/upload-profile-pic", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to save profile");
+            }
+            alert("Profile saved successfully");
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Failed to save profile. Please try again later.");
+          });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadUserProfile();
+
+        const profilePicInput = document.getElementById("profile-pic");
+        const profilePicPreview = document.getElementById(
+          "profile-picture-preview"
+        );
+
+        profilePicPreview.addEventListener("click", () => {
+          profilePicInput.click();
+        });
+
+        profilePicInput.addEventListener("change", (event) => {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              profilePicPreview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      });
+    </script>
+    <script>
+      function toggleLevels() {
+        const levelDetails = document.getElementById("level-details");
+        levelDetails.classList.toggle("hidden");
+      }
+    </script>
+  </body>
+</html>

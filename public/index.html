@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Money Ads</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        text-align: center;
+        margin-top: 50px;
+        background-color: #121212; /* Dark mode background */
+        color: #ffffff; /* White text for dark mode */
+      }
+
+      .login-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #444; /* Slight border for visibility */
+        border-radius: 10px;
+        background-color: #1e1e1e; /* Slightly lighter dark background */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Adding shadow for depth */
+      }
+
+      .login-container img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+      }
+
+      .login-container .button {
+        display: block;
+        padding: 12px 24px;
+        background-color: #200fbb; /* Darker shade for button */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px 0;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease; /* Smooth hover animation */
+      }
+
+      .login-container .button:hover {
+        background-color: #000e88; /* Darker shade for hover effect */
+      }
+
+      .login-container .links {
+        margin-top: 15px;
+      }
+
+      .login-container .links a {
+        color: #00ffcc; /* Vibrant color for links */
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .login-container .links a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-container">
+      <img src="uploads/logo.png" alt="Money Ads Logo" />
+      <a href="/auth/google" class="button">Sign in with Google</a>
+      <div class="links">
+        <a href="https://accounts.google.com/signup"
+          >Don't have an account? Make one</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

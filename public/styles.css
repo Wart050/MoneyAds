@@ -1,0 +1,192 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header,
+nav {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+header span,
+nav a {
+  margin: 0 10px;
+}
+
+main {
+  text-align: center;
+  margin: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#name,
+#gender,
+#age {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000000;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.tab-link {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.tab-link.active {
+  background-color: #55555511;
+  font-weight: bold;
+}
+
+/* Profile Page Form Styles */
+#profile-form input,
+#profile-form select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+}
+
+/* Login Page Styles */
+.login-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+button#save-button {
+  padding: 10px 20px;
+  background-color: var(--header-color);
+  border: none;
+  border-radius: 5px;
+  color: var(--primary-text);
+  transition: background-color 0.3s, transform 0.3s;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button#save-button:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: scale(1.05);
+}
+
+.level-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#user-level {
+  margin-right: 10px;
+}
+
+.info-button {
+  background-color: blue;
+  color: white;
+  border-radius: 50%;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.3s;
+}
+
+.info-button:hover {
+  transform: scale(1.1);
+}
+
+#level-details.hidden {
+  display: none;
+}
+
+.level-box {
+  background-color: #444;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+.level-box:nth-child(odd) {
+  background-color: #555;
+}
+
+.level-box:nth-child(even) {
+  background-color: #666;
+}
+
+#level-details {
+  list-style-type: none;
+  padding: 0;
+  text-align: center; /* Center all content */
+}
+
+.level-box {
+  margin: 10px auto;
+  padding: 15px;
+  width: 80%; /* Adjust the width as needed */
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
